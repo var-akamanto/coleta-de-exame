@@ -1,23 +1,36 @@
 package ifsc.poo3.prova.entities;
 
+
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 public class user {
-    private String name;
+    private String first_name;
+    private String last_name;
+    private String full_name;
     private char gender;
     private short age;
-    private Date birth_date;
+    private int birth_day;
+    private int birth_month;
+    private int birth_year;
     private String register_id;
     private String login_user;
     private String login_password;
 
 
-    public String getName() {
+    LocalDate now = LocalDate.now();
+
+    public String getFirst_name() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setFirst_name(String firstName) {
         this.name = name;
+    }
+
+    public String getFull_name(){
+        return first_name + " " + last_name;
     }
 
     public char getGender() {
@@ -29,19 +42,14 @@ public class user {
     }
 
     public short getAge() {
-        return age;
+        LocalDate birth_date = LocalDate.of(birth_year,birth_month,birth_day);
+        Period diff = Period.between(birth_date,now);
+        int age = diff.getYears();
+
     }
 
     public void setAge(short age) {
         this.age = age;
-    }
-
-    public Date getBirth_date() {
-        return birth_date;
-    }
-
-    public void setBirth_date(Date birth_date) {
-        this.birth_date = birth_date;
     }
 
     public String getRegister_id() {
