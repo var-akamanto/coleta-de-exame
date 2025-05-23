@@ -1,9 +1,10 @@
 package ifsc.poo3.prova.entities;
 
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 public class user {
     private String first_name;
@@ -19,13 +20,22 @@ public class user {
 
 
     LocalDate now = LocalDate.now();
+    LocalDate birth_date = LocalDate.of(birth_year,birth_month,birth_day);
 
     public String getFirst_name() {
-        return name;
+        return this.first_name;
     }
 
     public void setFirst_name(String firstName) {
-        this.name = name;
+        this.first_name = firstName;
+    }
+
+    public String getLast_name() {
+        return this.last_name;
+    }
+
+    public void setLast_name(String LastName) {
+        this.last_name = last_name;
     }
 
     public String getFull_name(){
@@ -41,7 +51,6 @@ public class user {
     }
 
     public short getAge() {
-        LocalDate birth_date = LocalDate.of(birth_year,birth_month,birth_day);
         Period diff = Period.between(birth_date,now);
         return (short) diff.getYears();
 
@@ -56,20 +65,15 @@ public class user {
     }
 
     public String getLogin_user() {
+        login_user = first_name+birth_date.getDayOfYear();
         return login_user;
     }
 
-    public void setLogin_user(String login_user) {
-        this.login_user = login_user;
-    }
-
     public String getLogin_password() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+        login_password = birth_date.format(formatter);
         return login_password;
     }
-
-    public void setLogin_password(String login_password) {
-        this.login_password = login_password;
     }
-}
 
 
