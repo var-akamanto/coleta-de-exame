@@ -10,7 +10,6 @@ public class user {
     private String last_name;
     private String full_name;
     private char gender;
-    private short age;
     private int birth_day;
     private int birth_month;
     private int birth_year;
@@ -44,12 +43,8 @@ public class user {
     public short getAge() {
         LocalDate birth_date = LocalDate.of(birth_year,birth_month,birth_day);
         Period diff = Period.between(birth_date,now);
-        int age = diff.getYears();
+        return (short) diff.getYears();
 
-    }
-
-    public void setAge(short age) {
-        this.age = age;
     }
 
     public String getRegister_id() {
