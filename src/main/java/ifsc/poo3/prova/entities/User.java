@@ -5,8 +5,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static java.time.LocalDate.of;
-
 public class User {
     private String first_name;
     private String last_name;
@@ -30,6 +28,7 @@ public class User {
         this.birth_year = birth_year;
         this.now = LocalDate.now();
         this.birth_date = LocalDate.of(birth_year,birth_month,birth_day);
+        this.register_id = generate_id(register_id);
     }
 
 
@@ -80,7 +79,11 @@ public class User {
     }
 
     public String getLogin_user() {
-        return first_name + birth_date.getDayOfYear();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd");
+        String day_of_month = birth_date.format(formatter);
+
+
+        return first_name + day_of_month;
     }
 
     public String getLogin_password() {
@@ -90,17 +93,17 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "full_name='" + getFull_name() + '\'' +
-                "id='" + register_id + '\'' +
-                ", gender=" + getGender() +
-                ", birth_date=" + birth_date +
-                ", age=" + getAge() +
-                ", register_id='" + register_id + '\'' +
-                "user='" + getLogin_user() + '\'' +
-                "password='" + getLogin_password() + '\'' +
+        return "User{\n" +
+                "full_name='" + getFull_name() + "'\n" +
+                "id='" + register_id + "'\n" +
+                "gender=" + getGender() + "\n" +
+                "birth_date=" + birth_date + "\n" +
+                "age=" + getAge() + "\n" +
+                "user='" + getLogin_user() + "'\n" +
+                "password='" + getLogin_password() + "'\n" +
                 '}';
     }
+
 }
 
 
