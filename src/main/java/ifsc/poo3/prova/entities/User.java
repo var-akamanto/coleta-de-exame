@@ -14,10 +14,14 @@ public class User {
     private int birth_month;
     private int birth_year;
     private String register_id;
-    private LocalDate now;
+    private final LocalDate now = LocalDate.now();
     private LocalDate birth_date;
+    private String birth_date_formatted;
 
-
+    private String getBirth_date_formatted(LocalDate birth_date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return birth_date.format(formatter);
+    }
 
     public User(String first_name, String last_name, char gender, int birth_day, int birth_month, int birth_year) {
         this.first_name = first_name;
@@ -26,19 +30,16 @@ public class User {
         this.birth_day = birth_day;
         this.birth_month = birth_month;
         this.birth_year = birth_year;
-        this.now = LocalDate.now();
-        this.birth_date = LocalDate.of(birth_year,birth_month,birth_day);
-        this.register_id = generate_id(register_id);
+        this.birth_date = LocalDate.of(birth_year, birth_month, birth_day);
+        this.birth_date_formatted = getBirth_date_formatted(birth_date);
+        this.register_id = generate_id();
     }
 
-
-    private String generate_id(String register_id){
+    private String generate_id(){
         Random rand = new Random();
         int randomNum = 100000 + rand.nextInt(900000); // número entre 100000 e 999999
-        this.register_id = String.valueOf(randomNum);
-        return this.register_id;
+        return String.valueOf(randomNum);
     }
-
 
     public String getFirst_name() {
         return this.first_name;
@@ -52,8 +53,8 @@ public class User {
         return this.last_name;
     }
 
-    public void setLast_name(String LastName) {
-        this.last_name = last_name;
+    public void setLast_name(String lastName) {
+        this.last_name = lastName;
     }
 
     public String getFull_name(){
@@ -69,20 +70,17 @@ public class User {
     }
 
     public short getAge() {
-        Period diff = Period.between(birth_date,now);
+        Period diff = Period.between(birth_date, now);
         return (short) diff.getYears();
-
     }
 
-    public String getRegister_id() {
-        return (register_id);
+    public String get_id() {
+        return register_id;
     }
 
     public String getLogin_user() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd");
         String day_of_month = birth_date.format(formatter);
-
-
         return first_name + day_of_month;
     }
 
@@ -97,13 +95,10 @@ public class User {
                 "full_name='" + getFull_name() + "'\n" +
                 "id='" + register_id + "'\n" +
                 "gender=" + getGender() + "\n" +
-                "birth_date=" + birth_date + "\n" +
+                "birth_date=" + getBirth_date_formatted(birth_date) + "\n" +
                 "age=" + getAge() + "\n" +
                 "user='" + getLogin_user() + "'\n" +
                 "password='" + getLogin_password() + "'\n" +
                 '}';
     }
-
 }
-
-
