@@ -1,6 +1,6 @@
 package ifsc.poo3.prova.entities;
 
-public class hospital {
+public class Hospital {
     private String name;
     private String street_name;
     private short street_number;
