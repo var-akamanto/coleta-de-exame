@@ -8,7 +8,7 @@ public class Hospital {
     private String city;
     private String state;
     private String postal_code;
-    private int phone_number;
+    private String phone_number;
     private String full_address;
 
     public String getName() {
@@ -67,11 +67,11 @@ public class Hospital {
         this.postal_code = postal_code;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 
